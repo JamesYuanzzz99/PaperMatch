@@ -1,0 +1,1 @@
+EtPracticeQuestionInfoServiceImpl：97  可以注入bank的mapper用bank的接口，减少操作

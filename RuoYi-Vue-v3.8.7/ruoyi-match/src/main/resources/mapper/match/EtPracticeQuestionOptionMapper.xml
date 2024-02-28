@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.match.mapper.EtPracticeQuestionOptionMapper">
+
+    <resultMap type="EtPracticeQuestionOption" id="EtPracticeQuestionOptionResult">
+        <result property="id"    column="id"    />
+        <result property="questionId"    column="question_id"    />
+        <result property="optionNum"    column="option_num"    />
+        <result property="content"    column="content"    />
+        <result property="sort"    column="sort"    />
+        <result property="field1"    column="field1"    />
+        <result property="field2"    column="field2"    />
+        <result property="field3"    column="field3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+<!--    <sql id="practiceQuestionOptionJoins">-->
+
+<!--        SELECT *-->
+<!--        FROM et_practice_question_option a-->
+<!--                 LEFT JOIN et_practice_question_info b ON b.id = a.question_id;-->
+<!--    </sql>-->
+
+    <sql id="selectEtPracticeQuestionOptionVo">
+        select id, question_id, option_num, content, sort, field1, field2, field3, create_by, create_time, update_by, update_time, remarks, del_flag from et_practice_question_option
+    </sql>
+
+    <select id="selectEtoptions" parameterType="EtPracticeQuestionOption" resultMap="EtPracticeQuestionOptionResult">
+        <include refid="selectEtPracticeQuestionOptionVo"/>
+        <where>
+        </where>
+    </select>
+
+    <select id="selectEtoptions2" parameterType="String" resultMap="EtPracticeQuestionOptionResult">
+        <include refid="selectEtPracticeQuestionOptionVo"/>
+        <where>
+        </where>
+    </select>
+
+    <select id="selectEtPracticeQuestionOptionById" parameterType="String" resultMap="EtPracticeQuestionOptionResult">
+        <include refid="selectEtPracticeQuestionOptionVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectQuestionOptionListByQuestionInfoId" resultMap="EtPracticeQuestionOptionResult">
+        <include refid="selectEtPracticeQuestionOptionVo"/>
+        WHERE question_id = #{questionInfoId}
+    </select>
+
+
+
+
+    <insert id="insertEtPracticeQuestionOption" parameterType="EtPracticeQuestionOption">
+        insert into et_practice_question_option
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="questionId != null">question_id,</if>
+            <if test="optionNum != null and optionNum != ''">option_num,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="sort != null">sort,</if>
+            <if test="field1 != null">field1,</if>
+            <if test="field2 != null">field2,</if>
+            <if test="field3 != null">field3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="questionId != null">#{questionId},</if>
+            <if test="optionNum != null and optionNum != ''">#{optionNum},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="field1 != null">#{field1},</if>
+            <if test="field2 != null">#{field2},</if>
+            <if test="field3 != null">#{field3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEtPracticeQuestionOption" parameterType="EtPracticeQuestionOption">
+        update et_practice_question_option
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="questionId != null">question_id = #{questionId},</if>
+            <if test="optionNum != null and optionNum != ''">option_num = #{optionNum},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="field1 != null">field1 = #{field1},</if>
+            <if test="field2 != null">field2 = #{field2},</if>
+            <if test="field3 != null">field3 = #{field3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEtPracticeQuestionOptionById" parameterType="String">
+        delete from et_practice_question_option where id = #{id}
+    </delete>
+
+    <delete id="deleteEtPracticeQuestionOptionByIds" parameterType="String">
+        delete from et_practice_question_option where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

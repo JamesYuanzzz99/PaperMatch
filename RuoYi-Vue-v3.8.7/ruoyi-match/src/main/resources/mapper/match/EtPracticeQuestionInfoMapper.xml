@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.match.mapper.EtPracticeQuestionInfoMapper">
+    
+    <resultMap type="EtPracticeQuestionInfo" id="EtPracticeQuestionInfoResult">
+        <result property="id"    column="id"    />
+        <result property="code"    column="code"    />
+        <result property="questionBankId"    column="question_bank_id"    />
+        <result property="content"    column="content"    />
+        <result property="typeId"    column="type_id"    />
+        <result property="complexity"    column="complexity"    />
+        <result property="answer"    column="answer"    />
+        <result property="judgeAnswer"    column="judge_answer"    />
+        <result property="completionAnswer"    column="completion_answer"    />
+        <result property="answerExplain"    column="answer_explain"    />
+        <result property="picPath"    column="pic_path"    />
+        <result property="picId"    column="pic_id"    />
+        <result property="status"    column="status"    />
+        <result property="field1"    column="field1"    />
+        <result property="field2"    column="field2"    />
+        <result property="field3"    column="field3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectEtPracticeQuestionInfoVo">
+        select id, code, question_bank_id, content, type_id, complexity, answer, judge_answer, completion_answer, answer_explain, pic_path, pic_id, status, field1, field2, field3, create_by, create_time, update_by, update_time, remarks, del_flag from et_practice_question_info
+    </sql>
+
+    <select id="selectEtPracticeQuestionInfoList" parameterType="EtPracticeQuestionInfo" resultMap="EtPracticeQuestionInfoResult">
+        <include refid="selectEtPracticeQuestionInfoVo"/>
+        <where>  
+            <if test="code != null "> and code = #{code}</if>
+            <if test="questionBankId != null  and questionBankId != ''"> and question_bank_id = #{questionBankId}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="typeId != null  and typeId != ''"> and type_id = #{typeId}</if>
+            <if test="complexity != null  and complexity != ''"> and complexity = #{complexity}</if>
+            <if test="answer != null  and answer != ''"> and answer = #{answer}</if>
+            <if test="judgeAnswer != null  and judgeAnswer != ''"> and judge_answer = #{judgeAnswer}</if>
+            <if test="completionAnswer != null  and completionAnswer != ''"> and completion_answer = #{completionAnswer}</if>
+            <if test="answerExplain != null  and answerExplain != ''"> and answer_explain = #{answerExplain}</if>
+            <if test="picPath != null  and picPath != ''"> and pic_path = #{picPath}</if>
+            <if test="picId != null  and picId != ''"> and pic_id = #{picId}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="field1 != null  and field1 != ''"> and field1 = #{field1}</if>
+            <if test="field2 != null  and field2 != ''"> and field2 = #{field2}</if>
+            <if test="field3 != null  and field3 != ''"> and field3 = #{field3}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectEtPracticeQuestionInfoById" parameterType="String" resultMap="EtPracticeQuestionInfoResult">
+        <include refid="selectEtPracticeQuestionInfoVo"/>
+        where id = #{id}
+    </select>
+    <select id="getIdValueMap" resultType="java.util.Map">
+            SELECT id, code, questionBankId, content, typeId, complexity, answer, judgeAnswer, completionAnswer,
+            answerExplain, picPath, picId, status, field1, field2, field3, createTime, updateTime, remarks, delFlag
+            FROM et_practice_question_info
+            WHERE 1=1
+            <if test="condition != null">
+                <!-- 根据条件拼接动态 SQL -->
+                <if test="condition.questionBankId != null"> AND id = #{condition.questionBankId} </if>
+                <!-- 其他字段的判断... -->
+            </if>
+
+    </select>
+
+    <insert id="insertEtPracticeQuestionInfo" parameterType="EtPracticeQuestionInfo">
+        insert into et_practice_question_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="code != null">code,</if>
+            <if test="questionBankId != null">question_bank_id,</if>
+            <if test="content != null">content,</if>
+            <if test="typeId != null">type_id,</if>
+            <if test="complexity != null">complexity,</if>
+            <if test="answer != null">answer,</if>
+            <if test="judgeAnswer != null">judge_answer,</if>
+            <if test="completionAnswer != null">completion_answer,</if>
+            <if test="answerExplain != null">answer_explain,</if>
+            <if test="picPath != null">pic_path,</if>
+            <if test="picId != null">pic_id,</if>
+            <if test="status != null">status,</if>
+            <if test="field1 != null">field1,</if>
+            <if test="field2 != null">field2,</if>
+            <if test="field3 != null">field3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="code != null">#{code},</if>
+            <if test="questionBankId != null">#{questionBankId},</if>
+            <if test="content != null">#{content},</if>
+            <if test="typeId != null">#{typeId},</if>
+            <if test="complexity != null">#{complexity},</if>
+            <if test="answer != null">#{answer},</if>
+            <if test="judgeAnswer != null">#{judgeAnswer},</if>
+            <if test="completionAnswer != null">#{completionAnswer},</if>
+            <if test="answerExplain != null">#{answerExplain},</if>
+            <if test="picPath != null">#{picPath},</if>
+            <if test="picId != null">#{picId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="field1 != null">#{field1},</if>
+            <if test="field2 != null">#{field2},</if>
+            <if test="field3 != null">#{field3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+
+    <update id="updateEtPracticeQuestionInfo" parameterType="EtPracticeQuestionInfo">
+        update et_practice_question_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null">code = #{code},</if>
+            <if test="questionBankId != null">question_bank_id = #{questionBankId},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="complexity != null">complexity = #{complexity},</if>
+            <if test="answer != null">answer = #{answer},</if>
+            <if test="judgeAnswer != null">judge_answer = #{judgeAnswer},</if>
+            <if test="completionAnswer != null">completion_answer = #{completionAnswer},</if>
+            <if test="answerExplain != null">answer_explain = #{answerExplain},</if>
+            <if test="picPath != null">pic_path = #{picPath},</if>
+            <if test="picId != null">pic_id = #{picId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="field1 != null">field1 = #{field1},</if>
+            <if test="field2 != null">field2 = #{field2},</if>
+            <if test="field3 != null">field3 = #{field3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEtPracticeQuestionInfoById" parameterType="String">
+        delete from et_practice_question_info where id = #{id}
+    </delete>
+
+    <delete id="deleteEtPracticeQuestionInfoByIds" parameterType="String">
+        delete from et_practice_question_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <update id="deleteEtPracticeQuestionInfoAnswerFile" parameterType="String">
+        UPDATE et_practice_question_info SET field1 = null
+    </update>
+
+
+</mapper>

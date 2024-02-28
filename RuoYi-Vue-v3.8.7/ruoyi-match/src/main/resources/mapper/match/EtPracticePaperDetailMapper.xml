@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.match.mapper.EtPracticePaperDetailMapper">
+    
+    <resultMap type="EtPracticePaperDetail" id="EtPracticePaperDetailResult">
+        <result property="id"    column="id"    />
+        <result property="paperId"    column="paper_id"    />
+        <result property="questionNo"    column="question_no"    />
+        <result property="questionId"    column="question_id"    />
+        <result property="field1"    column="field1"    />
+        <result property="field2"    column="field2"    />
+        <result property="field3"    column="field3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectEtPracticePaperDetailVo">
+        select id, paper_id, question_no, question_id, field1, field2, field3, create_by, create_time, update_by, update_time, remarks, del_flag from et_practice_paper_detail
+    </sql>
+
+    <select id="selectEtPracticePaperDetailList" parameterType="EtPracticePaperDetail" resultMap="EtPracticePaperDetailResult">
+        <include refid="selectEtPracticePaperDetailVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectEtPracticePaperDetailById" parameterType="String" resultMap="EtPracticePaperDetailResult">
+        <include refid="selectEtPracticePaperDetailVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectEtPracticePaperDetailByPaperId" parameterType="String" resultMap="EtPracticePaperDetailResult">
+        <include refid="selectEtPracticePaperDetailVo"/>
+          where paper_id = #{paperid}
+    </select>
+    <select id="selectEtPracticePaperDetailByQuestionId" parameterType="String" resultMap="EtPracticePaperDetailResult">
+        <include refid="selectEtPracticePaperDetailVo"/>
+        where question_id = #{questionid}
+    </select>
+
+    <insert id="insertEtPracticePaperDetail" parameterType="EtPracticePaperDetail">
+        insert into et_practice_paper_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="paperId != null">paper_id,</if>
+            <if test="questionNo != null">question_no,</if>
+            <if test="questionId != null">question_id,</if>
+            <if test="field1 != null">field1,</if>
+            <if test="field2 != null">field2,</if>
+            <if test="field3 != null">field3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="paperId != null">#{paperId},</if>
+            <if test="questionNo != null">#{questionNo},</if>
+            <if test="questionId != null">#{questionId},</if>
+            <if test="field1 != null">#{field1},</if>
+            <if test="field2 != null">#{field2},</if>
+            <if test="field3 != null">#{field3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEtPracticePaperDetail" parameterType="EtPracticePaperDetail">
+        update et_practice_paper_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="paperId != null">paper_id = #{paperId},</if>
+            <if test="questionNo != null">question_no = #{questionNo},</if>
+            <if test="questionId != null">question_id = #{questionId},</if>
+            <if test="field1 != null">field1 = #{field1},</if>
+            <if test="field2 != null">field2 = #{field2},</if>
+            <if test="field3 != null">field3 = #{field3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEtPracticePaperDetailById" parameterType="String">
+        delete from et_practice_paper_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteEtPracticePaperDetailByIds" parameterType="String">
+        delete from et_practice_paper_detail where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="deleteEtPracticePaperDetailByPaperId"  parameterType="String">
+        delete from et_practice_paper_detail where paper_id = #{paperid}
+    </delete>
+</mapper>

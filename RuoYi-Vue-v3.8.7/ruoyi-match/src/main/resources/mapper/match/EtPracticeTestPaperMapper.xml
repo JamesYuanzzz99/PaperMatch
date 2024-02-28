@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.match.mapper.EtPracticeTestPaperMapper">
+    
+    <resultMap type="EtPracticeTestPaper" id="EtPracticeTestPaperResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="courseId"    column="course_id"    />
+        <result property="paperScore"    column="paper_score"    />
+        <result property="paperSums"    column="paper_sums"    />
+        <result property="questionBankId"    column="question_bank_id"    />
+        <result property="questionBankName"    column="question_bank_name"    />
+        <result property="groupWay"    column="group_way"    />
+        <result property="examRulesId"    column="exam_rules_id"    />
+        <result property="selectSum"    column="select_sum"    />
+        <result property="selectGrade"    column="select_grade"    />
+        <result property="selectScores"    column="select_scores"    />
+        <result property="judgeSum"    column="judge_sum"    />
+        <result property="judgeGrade"    column="judge_grade"    />
+        <result property="judgeScores"    column="judge_scores"    />
+        <result property="mulSelectSum"    column="mul_select_sum"    />
+        <result property="mulSelectGrade"    column="mul_select_grade"    />
+        <result property="mulSelectScores"    column="mul_select_scores"    />
+        <result property="completionSum"    column="completion_sum"    />
+        <result property="completionGrade"    column="completion_grade"    />
+        <result property="completionScores"    column="completion_scores"    />
+        <result property="answerSum"    column="answer_sum"    />
+        <result property="answerGrade"    column="answer_grade"    />
+        <result property="answerScores"    column="answer_scores"    />
+        <result property="discussSum"    column="discuss_sum"    />
+        <result property="discussGrade"    column="discuss_grade"    />
+        <result property="discussScores"    column="discuss_scores"    />
+        <result property="uncertaintiesSum"    column="uncertainties_sum"    />
+        <result property="uncertaintiesGrade"    column="uncertainties_grade"    />
+        <result property="uncertaintiesScores"    column="uncertainties_scores"    />
+        <result property="status"    column="status"    />
+        <result property="field1"    column="field1"    />
+        <result property="field2"    column="field2"    />
+        <result property="field3"    column="field3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectEtPracticeTestPaperVo">
+        select id, name, course_id, paper_score, paper_sums, question_bank_id, question_bank_name, group_way, exam_rules_id, select_sum, select_grade, select_scores, judge_sum, judge_grade, judge_scores, mul_select_sum, mul_select_grade, mul_select_scores, completion_sum, completion_grade, completion_scores, answer_sum, answer_grade, answer_scores, discuss_sum, discuss_grade, discuss_scores, uncertainties_sum, uncertainties_grade, uncertainties_scores, status, field1, field2, field3, create_by, create_time, update_by, update_time, remarks, del_flag from et_practice_test_paper
+    </sql>
+
+    <select id="selectEtPracticeTestPaperList" parameterType="EtPracticeTestPaper" resultMap="EtPracticeTestPaperResult">
+        <include refid="selectEtPracticeTestPaperVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="paperScore != null "> and paper_score = #{paperScore}</if>
+            <if test="questionBankName != null  and questionBankName != ''"> and question_bank_name like concat('%', #{questionBankName}, '%')</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectEtPracticeTestPaperById" parameterType="String" resultMap="EtPracticeTestPaperResult">
+        <include refid="selectEtPracticeTestPaperVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertEtPracticeTestPaper" parameterType="EtPracticeTestPaper">
+        insert into et_practice_test_paper
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="courseId != null">course_id,</if>
+            <if test="paperScore != null">paper_score,</if>
+            <if test="paperSums != null">paper_sums,</if>
+            <if test="questionBankId != null">question_bank_id,</if>
+            <if test="questionBankName != null">question_bank_name,</if>
+            <if test="groupWay != null">group_way,</if>
+            <if test="examRulesId != null">exam_rules_id,</if>
+            <if test="selectSum != null">select_sum,</if>
+            <if test="selectGrade != null">select_grade,</if>
+            <if test="selectScores != null">select_scores,</if>
+            <if test="judgeSum != null">judge_sum,</if>
+            <if test="judgeGrade != null">judge_grade,</if>
+            <if test="judgeScores != null">judge_scores,</if>
+            <if test="mulSelectSum != null">mul_select_sum,</if>
+            <if test="mulSelectGrade != null">mul_select_grade,</if>
+            <if test="mulSelectScores != null">mul_select_scores,</if>
+            <if test="completionSum != null">completion_sum,</if>
+            <if test="completionGrade != null">completion_grade,</if>
+            <if test="completionScores != null">completion_scores,</if>
+            <if test="answerSum != null">answer_sum,</if>
+            <if test="answerGrade != null">answer_grade,</if>
+            <if test="answerScores != null">answer_scores,</if>
+            <if test="discussSum != null">discuss_sum,</if>
+            <if test="discussGrade != null">discuss_grade,</if>
+            <if test="discussScores != null">discuss_scores,</if>
+            <if test="uncertaintiesSum != null">uncertainties_sum,</if>
+            <if test="uncertaintiesGrade != null">uncertainties_grade,</if>
+            <if test="uncertaintiesScores != null">uncertainties_scores,</if>
+            <if test="status != null">status,</if>
+            <if test="field1 != null">field1,</if>
+            <if test="field2 != null">field2,</if>
+            <if test="field3 != null">field3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="courseId != null">#{courseId},</if>
+            <if test="paperScore != null">#{paperScore},</if>
+            <if test="paperSums != null">#{paperSums},</if>
+            <if test="questionBankId != null">#{questionBankId},</if>
+            <if test="questionBankName != null">#{questionBankName},</if>
+            <if test="groupWay != null">#{groupWay},</if>
+            <if test="examRulesId != null">#{examRulesId},</if>
+            <if test="selectSum != null">#{selectSum},</if>
+            <if test="selectGrade != null">#{selectGrade},</if>
+            <if test="selectScores != null">#{selectScores},</if>
+            <if test="judgeSum != null">#{judgeSum},</if>
+            <if test="judgeGrade != null">#{judgeGrade},</if>
+            <if test="judgeScores != null">#{judgeScores},</if>
+            <if test="mulSelectSum != null">#{mulSelectSum},</if>
+            <if test="mulSelectGrade != null">#{mulSelectGrade},</if>
+            <if test="mulSelectScores != null">#{mulSelectScores},</if>
+            <if test="completionSum != null">#{completionSum},</if>
+            <if test="completionGrade != null">#{completionGrade},</if>
+            <if test="completionScores != null">#{completionScores},</if>
+            <if test="answerSum != null">#{answerSum},</if>
+            <if test="answerGrade != null">#{answerGrade},</if>
+            <if test="answerScores != null">#{answerScores},</if>
+            <if test="discussSum != null">#{discussSum},</if>
+            <if test="discussGrade != null">#{discussGrade},</if>
+            <if test="discussScores != null">#{discussScores},</if>
+            <if test="uncertaintiesSum != null">#{uncertaintiesSum},</if>
+            <if test="uncertaintiesGrade != null">#{uncertaintiesGrade},</if>
+            <if test="uncertaintiesScores != null">#{uncertaintiesScores},</if>
+            <if test="status != null">#{status},</if>
+            <if test="field1 != null">#{field1},</if>
+            <if test="field2 != null">#{field2},</if>
+            <if test="field3 != null">#{field3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEtPracticeTestPaper" parameterType="EtPracticeTestPaper">
+        update et_practice_test_paper
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="courseId != null">course_id = #{courseId},</if>
+            <if test="paperScore != null">paper_score = #{paperScore},</if>
+            <if test="paperSums != null">paper_sums = #{paperSums},</if>
+            <if test="questionBankId != null">question_bank_id = #{questionBankId},</if>
+            <if test="questionBankName != null">question_bank_name = #{questionBankName},</if>
+            <if test="groupWay != null">group_way = #{groupWay},</if>
+            <if test="examRulesId != null">exam_rules_id = #{examRulesId},</if>
+            <if test="selectSum != null">select_sum = #{selectSum},</if>
+            <if test="selectGrade != null">select_grade = #{selectGrade},</if>
+            <if test="selectScores != null">select_scores = #{selectScores},</if>
+            <if test="judgeSum != null">judge_sum = #{judgeSum},</if>
+            <if test="judgeGrade != null">judge_grade = #{judgeGrade},</if>
+            <if test="judgeScores != null">judge_scores = #{judgeScores},</if>
+            <if test="mulSelectSum != null">mul_select_sum = #{mulSelectSum},</if>
+            <if test="mulSelectGrade != null">mul_select_grade = #{mulSelectGrade},</if>
+            <if test="mulSelectScores != null">mul_select_scores = #{mulSelectScores},</if>
+            <if test="completionSum != null">completion_sum = #{completionSum},</if>
+            <if test="completionGrade != null">completion_grade = #{completionGrade},</if>
+            <if test="completionScores != null">completion_scores = #{completionScores},</if>
+            <if test="answerSum != null">answer_sum = #{answerSum},</if>
+            <if test="answerGrade != null">answer_grade = #{answerGrade},</if>
+            <if test="answerScores != null">answer_scores = #{answerScores},</if>
+            <if test="discussSum != null">discuss_sum = #{discussSum},</if>
+            <if test="discussGrade != null">discuss_grade = #{discussGrade},</if>
+            <if test="discussScores != null">discuss_scores = #{discussScores},</if>
+            <if test="uncertaintiesSum != null">uncertainties_sum = #{uncertaintiesSum},</if>
+            <if test="uncertaintiesGrade != null">uncertainties_grade = #{uncertaintiesGrade},</if>
+            <if test="uncertaintiesScores != null">uncertainties_scores = #{uncertaintiesScores},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="field1 != null">field1 = #{field1},</if>
+            <if test="field2 != null">field2 = #{field2},</if>
+            <if test="field3 != null">field3 = #{field3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEtPracticeTestPaperById" parameterType="String">
+        delete from et_practice_test_paper where id = #{id}
+    </delete>
+
+    <delete id="deleteEtPracticeTestPaperByIds" parameterType="String">
+        delete from et_practice_test_paper where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
