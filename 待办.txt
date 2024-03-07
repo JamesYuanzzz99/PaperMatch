@@ -1,1 +1,56 @@
 EtPracticeQuestionInfoServiceImpl：97  可以注入bank的mapper用bank的接口，减少操作
+
+bug:
+上传答案文件，在已有附件的情况下无法修改上传，推断：缺少判断已有filelist的逻辑
+答案附件跟踪文件未按照数据库指定路径显示
+试卷试题分值未更新至试题类型表
+error：
+无法新建试卷
+
+
+获取QuestionInfo的id
+根据QuestionInfo的id查询QuestionInfo的QuestionOptionList
+遍历QuestionOptionList，判断QuestionOption的id是否为空，
+	为空->add
+	不为空->update
+
+通过vue前端页面给后端发送4个选项字母和对应内容，选项和内容作为list<QuestionOption>传输给后端，
+后端接收前端的数据进行插入数据库操作，将字母选项插入到option_num，内容为content，
+
+
+2024年1月30日
+上传答案文件，在已有附件的情况下无法修改上传，推断是缺少判断已有filelist的逻辑
+试卷的试题列表显示 ---不太懂
+
+
+2024年1月31日
+--查表--
+     创建时间不显示
+--修改--
+     paperdetail与paper通过id=>paperid绑定，但paper表没paperdetail列，只能通过前端传出paper的id去     调用paperdetail的js接口，显示一个新表，
+--增加--
+     如何新建paper的同时新建paperdetail？？
+--删除--
+
+2024年2月1日
+--修改--
+     无法更新paperdetail
+--增加--
+     如何新建paperdetail的同时新建paperid？？
+--遗留问题--
+     无法传递detail的表中选中的questionids >> questionids[]未初始化？？？？
+
+    
+2024年2月4日
+--修改--
+     paperdetail为空时报错，缺少逻辑
+	修改时添加EtPracticePaperDetail报错，
+17:24:21.668 [http-nio-8080-exec-98] ERROR c.r.f.w.e.GlobalExceptionHandler - [handleRuntimeException,93] - 请求地址'/match/match_questions_paper_detail',发生未知异常.
+java.lang.ClassCastException: class java.util.LinkedHashMap cannot be cast to class java.lang.String (java.util.LinkedHashMap and java.lang.String are in module java.base of loader 'bootstrap')
+	at com.ruoyi.match.service.impl.EtPracticePaperDetailServiceImpl.updateEtPracticePaperDetail(EtPracticePaperDetailServiceImpl.java:136)
+	at com.ruoyi.match.controller.EtPracticePaperDetailController.edit(EtPracticePaperDetailController.java:147)
+
+    推断： 这里的List<String >应该改成<EtPracticePaperDetail>,毕竟传递的是表单，否则就将前端传递的表单改为传递数组，仿照插入逻辑，
+
+
+
